@@ -1,4 +1,5 @@
 use crate::bindings::*;
+use crate::constants::*;
 use crate::status::SaiStatus;
 use crate::types::SaiAttribute;
 use racoon_common::{Result, SaiOid, VlanId};
@@ -19,7 +20,7 @@ impl VlanApi {
     pub fn create_vlan(&self, switch_id: SaiOid, vlan_id: VlanId) -> Result<SaiOid> {
         let mut vlan_oid: SaiOid = 0;
 
-        let attr = SaiAttribute::new_u16(SAI_VLAN_ATTR_VLAN_ID as i32, vlan_id.get());
+        let attr = SaiAttribute::new_u16(SAI_VLAN_ATTR_VLAN_ID, vlan_id.get());
         let c_attr = unsafe { attr.to_c_attribute() };
 
         let status = unsafe {
@@ -60,12 +61,9 @@ impl VlanApi {
         let mut member_oid: SaiOid = 0;
 
         let attrs = vec![
-            SaiAttribute::new_oid(SAI_VLAN_MEMBER_ATTR_VLAN_ID as i32, vlan_oid),
-            SaiAttribute::new_oid(SAI_VLAN_MEMBER_ATTR_BRIDGE_PORT_ID as i32, bridge_port_id),
-            SaiAttribute::new_i32(
-                SAI_VLAN_MEMBER_ATTR_VLAN_TAGGING_MODE as i32,
-                tagging_mode as i32,
-            ),
+            SaiAttribute::new_oid(SAI_VLAN_MEMBER_ATTR_VLAN_ID, vlan_oid),
+            SaiAttribute::new_oid(SAI_VLAN_MEMBER_ATTR_BRIDGE_PORT_ID, bridge_port_id),
+            SaiAttribute::new_i32(SAI_VLAN_MEMBER_ATTR_VLAN_TAGGING_MODE, tagging_mode as i32),
         ];
 
         let c_attrs: Vec<sai_attribute_t> = attrs
@@ -122,7 +120,7 @@ impl VlanApi {
     }
 
     /// Get VLAN attribute
-    pub fn get_attribute(&self, vlan_oid: SaiOid, attr_id: i32) -> Result<SaiAttribute> {
+    pub fn get_attribute(&self, vlan_oid: SaiOid, attr_id: u32) -> Result<SaiAttribute> {
         let mut c_attr: sai_attribute_t = unsafe { std::mem::zeroed() };
         c_attr.id = attr_id;
 

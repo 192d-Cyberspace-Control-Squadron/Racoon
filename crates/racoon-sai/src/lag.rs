@@ -1,4 +1,5 @@
 use crate::bindings::*;
+use crate::constants::*;
 use crate::status::SaiStatus;
 use crate::types::SaiAttribute;
 use racoon_common::{Result, SaiOid};
@@ -66,8 +67,8 @@ impl LagApi {
         let mut member_oid: SaiOid = 0;
 
         let attrs = vec![
-            SaiAttribute::new_oid(SAI_LAG_MEMBER_ATTR_LAG_ID as i32, lag_id),
-            SaiAttribute::new_oid(SAI_LAG_MEMBER_ATTR_PORT_ID as i32, port_id),
+            SaiAttribute::new_oid(SAI_LAG_MEMBER_ATTR_LAG_ID, lag_id),
+            SaiAttribute::new_oid(SAI_LAG_MEMBER_ATTR_PORT_ID, port_id),
         ];
 
         let c_attrs: Vec<sai_attribute_t> = attrs

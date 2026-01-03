@@ -1,4 +1,5 @@
 use crate::bindings::*;
+use crate::constants::*;
 use racoon_common::RacoonError;
 use std::fmt;
 
@@ -41,8 +42,8 @@ impl From<sai_status_t> for SaiStatus {
 
 impl fmt::Display for SaiStatus {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        let msg = match self.0 as u32 {
-            x if x == SAI_STATUS_SUCCESS => "SUCCESS",
+        let msg = match self.0 {
+            x if x == SAI_STATUS_SUCCESS as i32 => "SUCCESS",
             x if x == SAI_STATUS_FAILURE => "FAILURE",
             x if x == SAI_STATUS_NOT_SUPPORTED => "NOT_SUPPORTED",
             x if x == SAI_STATUS_NO_MEMORY => "NO_MEMORY",

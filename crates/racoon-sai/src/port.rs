@@ -1,4 +1,5 @@
 use crate::bindings::*;
+use crate::constants::*;
 use crate::status::SaiStatus;
 use crate::types::SaiAttribute;
 use racoon_common::{Result, SaiOid};
@@ -32,7 +33,7 @@ impl PortApi {
     }
 
     /// Get port attribute
-    pub fn get_attribute(&self, port_id: SaiOid, attr_id: i32) -> Result<SaiAttribute> {
+    pub fn get_attribute(&self, port_id: SaiOid, attr_id: u32) -> Result<SaiAttribute> {
         let mut c_attr: sai_attribute_t = unsafe { std::mem::zeroed() };
         c_attr.id = attr_id;
 

@@ -1,5 +1,6 @@
 pub mod adapter;
 pub mod bindings;
+pub mod constants;
 pub mod fdb;
 pub mod lag;
 pub mod port;
@@ -11,3 +12,8 @@ pub mod vlan;
 pub use adapter::SaiAdapter;
 pub use status::SaiStatus;
 pub use types::{SaiAttribute, SaiObjectType};
+
+// Re-export bindings for convenient access
+pub use bindings::*;
+// Re-export constants
+pub use constants::*;

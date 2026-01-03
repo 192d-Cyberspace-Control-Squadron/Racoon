@@ -1,8 +1,8 @@
 use crate::bindings::*;
+use crate::constants::*;
 use crate::status::SaiStatus;
 use crate::types::SaiAttribute;
 use racoon_common::{Result, SaiOid};
-use std::sync::Arc;
 
 pub struct SwitchApi {
     api_table: *const sai_switch_api_t,
@@ -70,7 +70,7 @@ impl SwitchApi {
     }
 
     /// Get switch attribute
-    pub fn get_attribute(&self, switch_id: SaiOid, attr_id: i32) -> Result<SaiAttribute> {
+    pub fn get_attribute(&self, switch_id: SaiOid, attr_id: u32) -> Result<SaiAttribute> {
         let mut c_attr: sai_attribute_t = unsafe { std::mem::zeroed() };
         c_attr.id = attr_id;
 

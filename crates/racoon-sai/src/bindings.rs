@@ -8,5 +8,6 @@
 #![allow(non_snake_case)]
 #![allow(dead_code)]
 #![allow(improper_ctypes)]
+#![allow(clippy::all)]
 
 include!(concat!(env!("OUT_DIR"), "/sai_bindings.rs"));

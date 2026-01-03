@@ -43,9 +43,10 @@ fn main() {
         .allowlist_var("_SAI_.*")
         // Prepend enum names to avoid conflicts
         .prepend_enum_name(false)
+        // Translate macro constants
+        .parse_callbacks(Box::new(bindgen::CargoCallbacks::new()))
         // Use libc types
         .ctypes_prefix("libc")
-        .parse_callbacks(Box::new(bindgen::CargoCallbacks::new()))
         .generate()
         .expect("Unable to generate SAI bindings");
 

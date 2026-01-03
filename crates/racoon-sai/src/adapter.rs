@@ -1,8 +1,8 @@
 use crate::bindings::*;
+use crate::constants::*;
 use crate::status::SaiStatus;
 use libloading::{Library, Symbol};
 use racoon_common::{RacoonError, Result};
-use std::ffi::CString;
 use std::os::raw::c_void;
 use std::sync::Arc;
 use tracing::{info, warn};
@@ -78,12 +78,12 @@ impl SaiAdapter {
         info!("SAI library initialized successfully");
 
         // Query all API tables
-        let switch_api = Self::query_api(&api_query, sai_api_t_SAI_API_SWITCH)?;
-        let port_api = Self::query_api(&api_query, sai_api_t_SAI_API_PORT)?;
-        let vlan_api = Self::query_api(&api_query, sai_api_t_SAI_API_VLAN)?;
-        let fdb_api = Self::query_api(&api_query, sai_api_t_SAI_API_FDB)?;
-        let lag_api = Self::query_api(&api_query, sai_api_t_SAI_API_LAG)?;
-        let bridge_api = Self::query_api(&api_query, sai_api_t_SAI_API_BRIDGE)?;
+        let switch_api = Self::query_api(&api_query, SAI_API_SWITCH)?;
+        let port_api = Self::query_api(&api_query, SAI_API_PORT)?;
+        let vlan_api = Self::query_api(&api_query, SAI_API_VLAN)?;
+        let fdb_api = Self::query_api(&api_query, SAI_API_FDB)?;
+        let lag_api = Self::query_api(&api_query, SAI_API_LAG)?;
+        let bridge_api = Self::query_api(&api_query, SAI_API_BRIDGE)?;
 
         // Leak the symbols to get 'static lifetime
         let api_query = unsafe { std::mem::transmute(api_query) };

@@ -1,4 +1,5 @@
 use crate::bindings::*;
+use crate::constants::*;
 use crate::status::SaiStatus;
 use crate::types::SaiAttribute;
 use racoon_common::{MacAddress, Result, SaiOid};
@@ -30,10 +31,10 @@ impl FdbApi {
         fdb_entry.bv_id = bv_id;
 
         let attrs = vec![
-            SaiAttribute::new_i32(SAI_FDB_ENTRY_ATTR_TYPE as i32, entry_type as i32),
-            SaiAttribute::new_oid(SAI_FDB_ENTRY_ATTR_BRIDGE_PORT_ID as i32, bridge_port_id),
+            SaiAttribute::new_i32(SAI_FDB_ENTRY_ATTR_TYPE, entry_type as i32),
+            SaiAttribute::new_oid(SAI_FDB_ENTRY_ATTR_BRIDGE_PORT_ID, bridge_port_id),
             SaiAttribute::new_i32(
-                SAI_FDB_ENTRY_ATTR_PACKET_ACTION as i32,
+                SAI_FDB_ENTRY_ATTR_PACKET_ACTION,
                 SAI_PACKET_ACTION_FORWARD as i32,
             ),
         ];
