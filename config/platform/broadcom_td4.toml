@@ -1,0 +1,29 @@
+# Broadcom Tomahawk 4 Platform Configuration
+
+[platform]
+name = "Broadcom Tomahawk 4"
+asic_type = "broadcom_tomahawk4"
+sai_library = "/usr/lib/libsai_broadcom.so.1"
+
+[hardware]
+port_count = 256
+port_lanes = 8
+max_speed = 400000  # 400G
+buffer_size = 67108864  # 64MB
+
+[port_mapping]
+# Format: "port_name" = [physical_port, lanes]
+# Tomahawk 4 typically has 256 ports
+"Ethernet0" = [1, 8]
+"Ethernet8" = [2, 8]
+"Ethernet16" = [3, 8]
+"Ethernet24" = [4, 8]
+"Ethernet32" = [5, 8]
+"Ethernet40" = [6, 8]
+# ... (more ports would be configured in production)
+
+[capabilities]
+max_vlans = 4096
+max_fdb_entries = 262144
+max_routes = 1000000
+max_ecmp_groups = 16384

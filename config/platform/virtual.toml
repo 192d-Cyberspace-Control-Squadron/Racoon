@@ -1,0 +1,29 @@
+# Virtual Platform Configuration (for testing/development)
+
+[platform]
+name = "Virtual Switch"
+asic_type = "virtual"
+sai_library = "/usr/lib/libsai_vsai.so"
+
+[hardware]
+port_count = 32
+port_lanes = 4
+max_speed = 100000  # 100G
+buffer_size = 16777216  # 16MB
+
+[port_mapping]
+# Format: "port_name" = [physical_port, lanes]
+"Ethernet0" = [1, 4]
+"Ethernet4" = [2, 4]
+"Ethernet8" = [3, 4]
+"Ethernet12" = [4, 4]
+"Ethernet16" = [5, 4]
+"Ethernet20" = [6, 4]
+"Ethernet24" = [7, 4]
+"Ethernet28" = [8, 4]
+
+[capabilities]
+max_vlans = 4096
+max_fdb_entries = 32768
+max_routes = 100000
+max_ecmp_groups = 1024

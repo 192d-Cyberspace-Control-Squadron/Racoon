@@ -1,0 +1,36 @@
+# Racoon Network Operating System Configuration
+
+[platform]
+name = "virtual"
+sai_library = "/usr/lib/libsai.so"
+config_db_path = "/etc/racoon/config_db.json"
+
+[database]
+host = "127.0.0.1"
+port = 6379
+socket = "/var/run/racoon/database.sock"
+
+[logging]
+level = "info"
+format = "json"
+output = "/var/log/racoon/racoon.log"
+
+[services]
+enabled = [
+    "database",
+    "syncd",
+    "orchd",
+    "portd",
+    "fdbsyncd",
+    "mgmtd",
+    "configd",
+    "eventd"
+]
+
+[management]
+rest_api_port = 8080
+cli_socket = "/var/run/racoon/cli.sock"
+
+[features]
+warm_boot = false
+fast_reboot = false
