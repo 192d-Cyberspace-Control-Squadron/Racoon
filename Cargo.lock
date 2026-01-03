@@ -670,7 +670,7 @@ dependencies = [
 
 [[package]]
 name = "racoon-cli"
-version = "0.4.0"
+version = "0.5.0"
 dependencies = [
  "anyhow",
  "racoon-common",
@@ -681,7 +681,7 @@ dependencies = [
 
 [[package]]
 name = "racoon-common"
-version = "0.4.0"
+version = "0.5.0"
 dependencies = [
  "anyhow",
  "once_cell",
@@ -696,7 +696,7 @@ dependencies = [
 
 [[package]]
 name = "racoon-configd"
-version = "0.4.0"
+version = "0.5.0"
 dependencies = [
  "anyhow",
  "racoon-common",
@@ -707,7 +707,7 @@ dependencies = [
 
 [[package]]
 name = "racoon-database"
-version = "0.4.0"
+version = "0.5.0"
 dependencies = [
  "anyhow",
  "dashmap",
@@ -722,7 +722,7 @@ dependencies = [
 
 [[package]]
 name = "racoon-db-client"
-version = "0.4.0"
+version = "0.5.0"
 dependencies = [
  "anyhow",
  "async-trait",
@@ -737,7 +737,7 @@ dependencies = [
 
 [[package]]
 name = "racoon-eventd"
-version = "0.4.0"
+version = "0.5.0"
 dependencies = [
  "anyhow",
  "racoon-common",
@@ -748,7 +748,7 @@ dependencies = [
 
 [[package]]
 name = "racoon-fdbsyncd"
-version = "0.4.0"
+version = "0.5.0"
 dependencies = [
  "anyhow",
  "racoon-common",
@@ -759,7 +759,7 @@ dependencies = [
 
 [[package]]
 name = "racoon-mgmtd"
-version = "0.4.0"
+version = "0.5.0"
 dependencies = [
  "anyhow",
  "racoon-common",
@@ -770,7 +770,7 @@ dependencies = [
 
 [[package]]
 name = "racoon-orchd"
-version = "0.4.0"
+version = "0.5.0"
 dependencies = [
  "anyhow",
  "async-trait",
@@ -786,7 +786,7 @@ dependencies = [
 
 [[package]]
 name = "racoon-portd"
-version = "0.4.0"
+version = "0.5.0"
 dependencies = [
  "anyhow",
  "racoon-common",
@@ -797,7 +797,7 @@ dependencies = [
 
 [[package]]
 name = "racoon-sai"
-version = "0.4.0"
+version = "0.5.0"
 dependencies = [
  "bindgen",
  "libc",
@@ -811,7 +811,7 @@ dependencies = [
 
 [[package]]
 name = "racoon-syncd"
-version = "0.4.0"
+version = "0.5.0"
 dependencies = [
  "anyhow",
  "async-trait",
