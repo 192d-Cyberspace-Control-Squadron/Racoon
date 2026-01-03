@@ -66,7 +66,7 @@ impl LagApi {
     ) -> Result<SaiOid> {
         let mut member_oid: SaiOid = 0;
 
-        let attrs = vec![
+        let attrs = [
             SaiAttribute::new_oid(SAI_LAG_MEMBER_ATTR_LAG_ID, lag_id),
             SaiAttribute::new_oid(SAI_LAG_MEMBER_ATTR_PORT_ID, port_id),
         ];

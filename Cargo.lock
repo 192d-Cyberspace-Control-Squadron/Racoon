@@ -773,10 +773,15 @@ name = "racoon-orchd"
 version = "0.3.0"
 dependencies = [
  "anyhow",
+ "async-trait",
+ "dashmap",
  "racoon-common",
+ "racoon-db-client",
  "serde",
+ "serde_json",
  "tokio",
  "tracing",
+ "tracing-subscriber",
 ]
 
 [[package]]
@@ -809,10 +814,16 @@ name = "racoon-syncd"
 version = "0.3.0"
 dependencies = [
  "anyhow",
+ "async-trait",
+ "dashmap",
  "racoon-common",
+ "racoon-db-client",
+ "racoon-sai",
  "serde",
+ "serde_json",
  "tokio",
  "tracing",
+ "tracing-subscriber",
 ]
 
 [[package]]

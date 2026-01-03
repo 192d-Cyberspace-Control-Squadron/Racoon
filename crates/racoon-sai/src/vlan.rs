@@ -60,7 +60,7 @@ impl VlanApi {
     ) -> Result<SaiOid> {
         let mut member_oid: SaiOid = 0;
 
-        let attrs = vec![
+        let attrs = [
             SaiAttribute::new_oid(SAI_VLAN_MEMBER_ATTR_VLAN_ID, vlan_oid),
             SaiAttribute::new_oid(SAI_VLAN_MEMBER_ATTR_BRIDGE_PORT_ID, bridge_port_id),
             SaiAttribute::new_i32(SAI_VLAN_MEMBER_ATTR_VLAN_TAGGING_MODE, tagging_mode as i32),

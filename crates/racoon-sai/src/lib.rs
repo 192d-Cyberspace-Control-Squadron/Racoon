@@ -12,6 +12,7 @@ pub mod vlan;
 pub use adapter::SaiAdapter;
 pub use status::SaiStatus;
 pub use types::{SaiAttribute, SaiObjectType};
+pub use vlan::VlanApi;
 
 // Re-export bindings for convenient access
 pub use bindings::*;

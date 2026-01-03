@@ -148,7 +148,12 @@ impl SaiAttribute {
     }
 
     /// Convert Rust attribute to C SAI attribute
-    /// This is unsafe because it creates raw pointers
+    ///
+    /// # Safety
+    ///
+    /// This function creates raw pointers and accesses C unions. The caller must ensure
+    /// that the returned `sai_attribute_t` is used correctly with the SAI API and that
+    /// the attribute value matches the expected type for the attribute ID.
     pub unsafe fn to_c_attribute(&self) -> sai_attribute_t {
         unsafe {
             let mut attr: sai_attribute_t = std::mem::zeroed();

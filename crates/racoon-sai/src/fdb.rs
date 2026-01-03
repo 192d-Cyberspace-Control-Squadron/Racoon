@@ -30,7 +30,7 @@ impl FdbApi {
         fdb_entry.mac_address.copy_from_slice(mac.as_bytes());
         fdb_entry.bv_id = bv_id;
 
-        let attrs = vec![
+        let attrs = [
             SaiAttribute::new_i32(SAI_FDB_ENTRY_ATTR_TYPE, entry_type as i32),
             SaiAttribute::new_oid(SAI_FDB_ENTRY_ATTR_BRIDGE_PORT_ID, bridge_port_id),
             SaiAttribute::new_i32(

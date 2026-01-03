@@ -20,7 +20,7 @@ type SaiApiUninitializeFn = unsafe extern "C" fn() -> sai_status_t;
 /// SAI Adapter - manages dynamic loading and interaction with vendor SAI libraries
 pub struct SaiAdapter {
     _library: Library,
-    api_query: Symbol<'static, SaiApiQueryFn>,
+    _api_query: Symbol<'static, SaiApiQueryFn>,
     api_uninitialize: Symbol<'static, SaiApiUninitializeFn>,
 
     // Cached API table pointers
@@ -86,12 +86,14 @@ impl SaiAdapter {
         let bridge_api = Self::query_api(&api_query, SAI_API_BRIDGE)?;
 
         // Leak the symbols to get 'static lifetime
+        #[allow(clippy::missing_transmute_annotations)]
         let api_query = unsafe { std::mem::transmute(api_query) };
+        #[allow(clippy::missing_transmute_annotations)]
         let api_uninitialize = unsafe { std::mem::transmute(api_uninitialize) };
 
         Ok(Arc::new(Self {
             _library: library,
-            api_query,
+            _api_query: api_query,
             api_uninitialize,
             switch_api,
             port_api,
