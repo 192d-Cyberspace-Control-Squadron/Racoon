@@ -2,15 +2,41 @@
 
 A modern, high-performance Network Operating System (NOS) written in Rust, designed for data center switching with vendor-independent SAI (Switch Abstraction Interface) integration.
 
+[![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](LICENSE)
+[![Rust](https://img.shields.io/badge/rust-1.75%2B-orange.svg)](https://www.rust-lang.org)
+[![Version](https://img.shields.io/badge/version-0.5.0-green.svg)](Cargo.toml)
+
 ## Overview
 
-Racoon is a full-featured data center NOS that provides:
+Racoon NOS is a full-featured data center network operating system that provides:
 
-- **L2 Switching**: VLAN management, FDB (MAC learning), Link Aggregation (LAG)
+- **L2 Switching**: Complete VLAN orchestration and hardware synchronization
 - **Vendor-Neutral**: Hardware abstraction through SAI for multi-vendor support
-- **Microservices Architecture**: Modular design inspired by SONiC
-- **Production-Ready**: Built with Rust for memory safety and performance
-- **Extensible**: Plugin-based architecture for future features (L3, QoS, ACLs)
+- **Database-Centric**: SONiC-inspired architecture with Valkey/Redis state management
+- **Production-Ready**: Built with Rust for memory safety, concurrency, and performance
+- **Extensible**: Microservices design for future features (L3, QoS, ACLs)
+
+## Quick Start
+
+```bash
+# 1. Start the database
+docker run -d -p 6379:6379 valkey/valkey:latest
+
+# 2. Build Racoon NOS
+cargo build --release
+
+# 3. Run the orchestration daemon
+cargo run --release --bin racoon-orchd
+
+# 4. Run the synchronization daemon (in another terminal)
+# Note: Requires SAI library for hardware programming
+cargo run --release --bin racoon-syncd
+
+# 5. Test VLAN creation
+./examples/vlan_create_test.sh
+```
+
+See [examples/README.md](examples/README.md) for detailed testing instructions.
 
 ## Architecture
 
@@ -41,20 +67,72 @@ User (CLI/API)
   → Hardware ASIC
 ```
 
-## Features (Phase 1 - Current)
+## Features
 
-### L2 Switching
-- ✅ VLAN creation and management (1-4094)
-- ✅ VLAN member management (tagged/untagged ports)
-- ✅ Dynamic MAC learning (FDB)
-- ✅ Static FDB entries
-- ✅ Link Aggregation (LAG / Port Channel)
-- ✅ Port configuration (speed, MTU, admin state)
+### ✅ Implemented (v0.5.0)
 
-### Management
-- ✅ Configuration via TOML files
-- ✅ Comprehensive logging with tracing
-- ✅ SAI library dynamic loading
+**Core Infrastructure**:
+
+- Database-centric state management with Valkey/Redis
+- Pub/sub event-driven architecture
+- Complete VLAN orchestration (CONFIG_DB → APPL_DB)
+- Hardware synchronization via SAI (APPL_DB → ASIC)
+- Type-safe VLAN ID validation (1-4094)
+- Concurrent state tracking with DashMap
+- Dynamic SAI library loading
+
+**Daemons**:
+
+- `racoon-orchd`: Orchestration daemon with VlanOrch
+- `racoon-syncd`: SAI synchronization daemon with VlanSync
+- Database client with connection pooling
+- Structured logging with tracing
+
+**SAI Integration**:
+
+- Auto-generated SAI bindings (bindgen)
+- Type-safe SAI API wrappers
+- VLAN create/delete operations
+- VLAN member management (tagged/untagged)
+- FDB, LAG, Bridge, Port API foundations
+
+**Testing & Documentation**:
+
+- End-to-end VLAN creation test script
+- Comprehensive architecture documentation
+- API reference guide
+- Development workflow guide
+
+### 🚧 In Progress
+
+- CLI interface
+- Port orchestration and synchronization
+- FDB synchronization
+- LAG orchestration
+
+### 📋 Planned
+
+**Phase 2 - L3 Routing**:
+
+- Static routes
+- ARP/NDP
+- Virtual Router
+- Router Interface
+- FRR integration (BGP, OSPF)
+
+**Phase 3 - Advanced Features**:
+
+- ACLs (Access Control Lists)
+- QoS (Quality of Service)
+- Mirroring/SPAN
+- Tunneling (VXLAN, GRE)
+
+**Phase 4 - High Availability**:
+
+- Warm boot
+- Fast reboot
+- State reconciliation
+- Configuration synchronization
 
 ## Building
 
@@ -227,13 +305,23 @@ Apache License 2.0. See [LICENSE](LICENSE) for details.
 - [SONiC](https://sonic-net.github.io/SONiC/) for architectural inspiration
 - The Rust community for excellent tooling
 
+## Documentation
+
+Comprehensive documentation is available in the `docs/` directory:
+
+- **[Architecture Guide](docs/architecture.md)**: System architecture, data flow, and design patterns
+- **[Development Guide](docs/development.md)**: Building, testing, debugging, and contributing
+- **[API Reference](docs/api-reference.md)**: Complete API documentation for all modules
+- **[Examples](examples/README.md)**: End-to-end testing and usage examples
+
 ## Support
 
-- GitHub Issues: https://github.com/johnwillman/Racoon/issues
-- Documentation: [docs/](docs/)
+- **Issues**: [GitHub Issues](https://github.com/johnwillman/Racoon/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/johnwillman/Racoon/discussions)
+- **Documentation**: [docs/](docs/)
 
 ---
 
-**Status**: Phase 1 Development (L2 Switching Foundation)
+**Status**: v0.5.0 - L2 VLAN Orchestration Complete
 
 Built with Rust 🦀 for the future of network infrastructure.
