@@ -18,7 +18,7 @@ Racoon is a full-featured data center NOS that provides:
 
 Racoon consists of independent services that communicate through a central database:
 
-- **racoon-database**: Redis-compatible state database with pub/sub
+- **racoon-database**: Valkey-compatible state database with pub/sub
 - **racoon-syncd**: SAI synchronization daemon (ASIC_DB → hardware)
 - **racoon-orchd**: Orchestration engine (configuration → SAI objects)
 - **racoon-portd**: Port state manager

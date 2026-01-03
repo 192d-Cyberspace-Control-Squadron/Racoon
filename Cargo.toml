@@ -35,7 +35,7 @@ toml = "0.8"
 
 # Database
 sled = "0.34"
-redis = { version = "0.27", features = ["tokio-comp", "connection-manager"] }
+redis = { version = "1", features = ["tokio-comp", "connection-manager"] }
 
 # FFI and bindings
 libc = "0.2"
